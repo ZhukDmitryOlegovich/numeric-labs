@@ -35,22 +35,22 @@ const read = (name: string): InputType => {
 const solveProgon = ({
 	a, b, c, d, n,
 }: InputType) => {
-	const alpfa: number[] = [];
-	const betta: number[] = [];
+	const alpha: number[] = [];
+	const beta: number[] = [];
 
 	for (let i = 0; i < n; i++) {
-		const denominator = (a[i - 1] || 0) * (alpfa[i - 1] || 0) + b[i];
-		alpfa.push(-c[i] / denominator);
-		betta.push((d[i] - (a[i - 1] || 0) * (betta[i - 1] || 0)) / denominator);
+		const denominator = (a[i - 1] || 0) * (alpha[i - 1] || 0) + b[i];
+		alpha.push(-c[i] / denominator);
+		beta.push((d[i] - (a[i - 1] || 0) * (beta[i - 1] || 0)) / denominator);
 	}
 
 	const x: number[] = [];
 
 	for (let i = n - 1; i >= 0; i--) {
-		x[i] = (alpfa[i] || 0) * (x[i + 1] || 0) + betta[i];
+		x[i] = (alpha[i] || 0) * (x[i + 1] || 0) + beta[i];
 	}
 
-	verbose('solve:', { alpfa, betta, x });
+	verbose('solve:', { alpha, beta, x });
 
 	return x;
 };
