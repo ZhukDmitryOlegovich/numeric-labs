@@ -50,6 +50,17 @@
                 "varsIgnorePattern": "^_",
                 "argsIgnorePattern": "^_"
             }
+        ],
+        "no-mixed-operators": [
+            "error",
+            {
+                "groups": [
+                    ["&", "|", "^", "~", "<<", ">>", ">>>"],
+                    ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+                    ["&&", "||"],
+                    ["in", "instanceof"]
+                ]
+            }
         ]
     }
 }

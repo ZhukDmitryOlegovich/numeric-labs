@@ -3,7 +3,7 @@ function bash-info {
 	bash -c "$1"
 }
 
-command="npx ts-node . "
+command="npx ts-node ./test.ts "
 
 echo "Count tests:" $(ls ./test | wc -l)
 for file in ./test/*

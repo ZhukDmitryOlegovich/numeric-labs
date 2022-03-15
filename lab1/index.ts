@@ -1,19 +1,19 @@
 import * as fs from 'fs';
 
-const verbose = (...args: any[]) => {
+export const verbose = (...args: any[]) => {
 	if (Number(process.env.VERBOSE)) {
 		// eslint-disable-next-line no-console
 		console.log(...args);
 	}
 };
 
-const more = <T, K>(arg: T, callback: (v: T) => K) => (
+export const more = <T, K>(arg: T, callback: (v: T) => K) => (
 	Number(process.env.MORE) ? callback(arg) : arg
 );
 
 type InputType = {a: number[], b: number[], c: number[], d: number[], n: number};
 
-const read = (name: string): InputType => {
+export const read = (name: string): InputType => {
 	const elems = fs.readFileSync(name, { encoding: 'utf8' })
 		.split(/[\s\n]+/g)
 		.filter(Boolean)
@@ -32,9 +32,14 @@ const read = (name: string): InputType => {
 	return ans;
 };
 
-const solveProgon = ({
+// eslint-disable-next-line import/prefer-default-export
+export const solveProgon = ({
 	a, b, c, d, n,
 }: InputType) => {
+	verbose('solveProgon:', {
+		a, b, c, d, n,
+	});
+
 	const alpha: number[] = [];
 	const beta: number[] = [];
 
@@ -50,14 +55,14 @@ const solveProgon = ({
 		x[i] = (alpha[i] || 0) * (x[i + 1] || 0) + beta[i];
 	}
 
-	verbose('solve:', { alpha, beta, x });
+	verbose('solveProgon:', { alpha, beta, x });
 
 	return x;
 };
 
 type FormatType = {m: number[][], d: number[], n: number};
 
-const format = ({
+export const format = ({
 	a, b, c, d, n,
 }: InputType): FormatType => {
 	const m = Array.from({ length: n }, () => Array.from({ length: n }, () => 0));
@@ -75,7 +80,7 @@ const format = ({
 
 const clone = <T>(c: T): T => (Array.isArray(c) ? c.map(clone) : c) as T;
 
-const solveGaus = ({ d: d1, m: m1, n }: FormatType) => {
+export const solveGaus = ({ d: d1, m: m1, n }: FormatType) => {
 	const d = clone(d1);
 	const m = clone(m1);
 
@@ -104,7 +109,7 @@ const solveGaus = ({ d: d1, m: m1, n }: FormatType) => {
 	return d;
 };
 
-const makeResult = ({ m, n }: FormatType, x: number[]) => Array
+export const makeResult = ({ m, n }: FormatType, x: number[]) => Array
 	.from({ length: n }, (_, i) => {
 		let di = 0;
 		for (let j = 0; j < n; j++) {
@@ -112,18 +117,3 @@ const makeResult = ({ m, n }: FormatType, x: number[]) => Array
 		}
 		return di;
 	});
-
-const inp = read(process.argv[2]);
-
-const s1 = solveProgon(inp);
-const f = format(inp);
-const s2 = solveGaus(f);
-const r = makeResult(f, s1);
-
-/* eslint-disable no-console */
-console.log('прогон:     ', s1);
-console.log('Гаус:       ', s2);
-console.log('разница:    ', more(s1.map((e, i) => (e - s2[i])), (s) => s.map((e) => e.toFixed(20))));
-console.log('подстановка:', r);
-console.log('разница:    ', more(inp.d.map((e, i) => (e - r[i])), (s) => s.map((e) => e.toFixed(20))));
-/* eslint-enable no-console */

@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "lab1:test": "cd lab1; bash ./test.sh"
+        "lab1:test": "cd lab1; bash ./test.sh",
+        "lab3:test": "ts-node ./lab3/test.ts"
     },
     "author": "",
     "license": "ISC",
