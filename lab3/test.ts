@@ -23,13 +23,13 @@ const run = (prefix: string, index: number, orig = originFunction, p?: [number, 
 	const func = buildFunc({
 		a, b, c, d, x,
 	});
-	console.log(`[\n  ${style.green('/*   x,       f(x),       g(x),       d(x)*/')}\n${a.flatMap((_, i) => [
+	console.log(`[\n  ${style.green('/*   x,       f(x),       g(x),       d(x) */')}\n${a.flatMap((_, i) => [
 		x[i],
 		(x[i] + x[i + 1]) / 2,
 	]).map((e) => [
 		e.toFixed(2), func(e).toExponential(5),
 		orig(e).toExponential(5), Math.abs(func(e) - orig(e)).toExponential(5)])
-		.map((e) => `  [ ${e.map((ei) => style.yellow(ei)).join(', ')} ]\n`).join('')}]`);
+		.map((e) => `  [ ${e.map((ei) => style.yellow(ei)).join(', ')} ],\n`).join('')}]`);
 	console.log();
 };
 
