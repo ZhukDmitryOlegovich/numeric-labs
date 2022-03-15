@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import style from 'chalk';
 import {
 	calcABCD, denamFunc, buildFunc, originFunction,
@@ -9,13 +10,15 @@ const run = (prefix: string, index: number, orig = originFunction, p?: [number, 
 	} = calcABCD(p);
 
 	console.log(style.bold.underline(`> ${prefix}:`));
-	// console.log(style.bold.underline('GeoGebra:'));
-	// console.log(`z${index}(x) = If(${a.map((_, i) => `${x[i]} <= x <= ${x[i + 1]}, `
-	// 	+ `${a[i]} `
-	// 	+ `+ ${b[i]} * (x - ${x[i]})`
-	// 	+ `+ ${c[i]} * (x - ${x[i]}) ^ 2`
-	// 	+ `+ ${d[i]} * (x - ${x[i]}) ^ 3`).join(', ')})`);
-	// console.log();
+	if (Number(process.env.GEOGEBRA)) {
+		console.log(style.bold.green('GeoGebra:'));
+		console.log(`z${index}(x) = If(${a.map((_, i) => `${x[i]} <= x <= ${x[i + 1]}, `
+		+ `${a[i]} `
+		+ `+ ${b[i]} * (x - ${x[i]})`
+		+ `+ ${c[i]} * (x - ${x[i]}) ^ 2`
+		+ `+ ${d[i]} * (x - ${x[i]}) ^ 3`).join(', ')})`);
+		console.log();
+	}
 
 	const func = buildFunc({
 		a, b, c, d, x,
