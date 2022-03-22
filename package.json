@@ -5,7 +5,7 @@
     "scripts": {
         "lab1:test": "cd lab1; bash ./test.sh",
         "lab3:test": "ts-node ./lab3/test.ts",
-        "lab3:test:geogebra": "GEPGEBRA=1 ts-node ./lab3/test.ts"
+        "lab3:test:geogebra": "GEOGEBRA=1 ts-node ./lab3/test.ts"
     },
     "author": "",
     "license": "ISC",
