@@ -9,7 +9,7 @@ export const originFunction = (
 export const denamFunc = (
 	a = 1, b = 5, n = N, fun = originFunction,
 ) => Array
-	.from({ length: n + 1 }, (_, i) => (a + ((b - a) * i) / n))
+	.from({ length: n + 1 }, (_, i) => (a + (b - a) * i / n))
 	.map((x): [number, number] => [x, fun(x)]);
 
 // eslint-disable-next-line import/prefer-default-export
@@ -65,5 +65,5 @@ export const buildFunc = ({
 
 	return i === -1
 		? NaN
-		: a[i] + b[i] * (valX - x[i]) + c[i] * (valX - x[i]) ** 2 + d[i] * (valX - x[i]) ** 2;
+		: a[i] + b[i] * (valX - x[i]) + c[i] * (valX - x[i]) ** 2 + d[i] * (valX - x[i]) ** 3;
 };
