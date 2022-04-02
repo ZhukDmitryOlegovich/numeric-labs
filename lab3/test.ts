@@ -29,7 +29,7 @@ const run = (prefix: string, index: number, orig = originFunction, p?: [number, 
 	]).map((e) => [
 		e.toFixed(2), func(e).toExponential(5),
 		orig(e).toExponential(5), Math.abs(func(e) - orig(e)).toExponential(5)])
-		.map((e) => `  [ ${e.map((ei) => style.yellow(ei)).join(', ')} ],\n`).join('')}]`);
+		.map((e) => `  [ ${e.map((ei) => style.yellow(ei)).join(', ')} ],\n`).join('')}]`.replace(/0\.0+e\+0/g, (s) => `${' '.repeat(s.length - 1)}0`));
 	console.log();
 };
 
